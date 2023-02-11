@@ -9,6 +9,8 @@ const Task = require('./models/Task')
 
 const taskRoutes = require('./routes/taskRoutes')
 
+const port = process.env.PORT || 3000
+
 app.engine('handlebars', exphbs.engine())
 app.set('view engine', 'handlebars')
 
@@ -27,7 +29,9 @@ app.use('/tasks', taskRoutes)
 conn
     .sync()
     .then(() => {
-        app.listen(3000)
+        app.listen(port, () => {
+            console.info(`App rodando em ${port}`)
+        })
     })
     .catch((err) => {
         console.log(err)
